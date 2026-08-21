@@ -21,6 +21,13 @@ uvicorn backend.main:app --reload --env-file .env
 
 The API is available at `http://127.0.0.1:8000`; interactive OpenAPI documentation is at `http://127.0.0.1:8000/docs`.
 
+The integrated McCann dashboard is served by the same process:
+
+- Team Lead Queue: `http://127.0.0.1:8000/`
+- Manual Review Queue: `http://127.0.0.1:8000/admin`
+
+The team page reads live routed leads and summary counts. The manual-review page asks for the value of `ADMIN_API_KEY` and sends it only to the protected backend endpoint for the current browser session.
+
 Run the pipeline manually:
 
 ```bash
@@ -86,6 +93,10 @@ Each object follows the front-end contract:
   "needs_manual_review": false
 }
 ```
+
+### `GET /leads/summary`
+
+Returns presentation-safe totals for the latest successful run, including routed/manual-review counts, average score, and routed lead counts by team. It never exposes manual-review records.
 
 ### `GET /leads/manual-review`
 

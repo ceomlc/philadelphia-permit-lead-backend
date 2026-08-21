@@ -162,6 +162,68 @@ class LeadRepository:
             ).fetchall()
         return [self._deserialize_lead(row) for row in rows]
 
+    def latest_summary(self) -> dict[str, Any]:
+        """Return presentation-safe counts for the latest completed run."""
+        with self._connect() as connection:
+            latest_run = connection.execute(
+                """
+                SELECT id FROM pipeline_runs
+                WHERE status = 'completed'
+                ORDER BY id DESC LIMIT 1
+                """
+            ).fetchone()
+            if latest_run is None:
+                return {
+                    "run_id": None,
+                    "leads_today": 0,
+                    "routed_count": 0,
+                    "manual_review_count": 0,
+                    "avg_score": None,
+                    "by_team": {
+                        "Construction": 0,
+                        "Commercial": 0,
+                        "Residential": 0,
+                    },
+                }
+
+            run_id = int(latest_run["id"])
+            totals = connection.execute(
+                """
+                SELECT COUNT(*) AS leads_today,
+                       SUM(CASE WHEN needs_manual_review = 0 THEN 1 ELSE 0 END)
+                           AS routed_count,
+                       SUM(CASE WHEN needs_manual_review = 1 THEN 1 ELSE 0 END)
+                           AS manual_review_count,
+                       AVG(score) AS avg_score
+                FROM leads WHERE run_id = ?
+                """,
+                (run_id,),
+            ).fetchone()
+            team_rows = connection.execute(
+                """
+                SELECT segment, COUNT(*) AS lead_count
+                FROM leads
+                WHERE run_id = ? AND needs_manual_review = 0
+                GROUP BY segment
+                """,
+                (run_id,),
+            ).fetchall()
+
+        by_team = {"Construction": 0, "Commercial": 0, "Residential": 0}
+        for row in team_rows:
+            if row["segment"] in by_team:
+                by_team[row["segment"]] = int(row["lead_count"])
+        return {
+            "run_id": run_id,
+            "leads_today": int(totals["leads_today"] or 0),
+            "routed_count": int(totals["routed_count"] or 0),
+            "manual_review_count": int(totals["manual_review_count"] or 0),
+            "avg_score": round(float(totals["avg_score"]))
+            if totals["avg_score"] is not None
+            else None,
+            "by_team": by_team,
+        }
+
     @staticmethod
     def _deserialize_lead(row: sqlite3.Row) -> dict[str, Any]:
         lead = dict(row)

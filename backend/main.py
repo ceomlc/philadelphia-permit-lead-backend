@@ -5,9 +5,12 @@ import secrets
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
 from enum import Enum
+from pathlib import Path
 from typing import Annotated, Callable
 
 from fastapi import FastAPI, Header, HTTPException, Query, status
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from permit_lead_pipeline import MAX_FETCH_LIMIT, PermitRow, fetch_permits
@@ -47,6 +50,21 @@ class PipelineRunResponse(BaseModel):
     routed_count: int
     manual_review_count: int
     csv_path: str
+
+
+class TeamCountsResponse(BaseModel):
+    Construction: int
+    Commercial: int
+    Residential: int
+
+
+class LeadSummaryResponse(BaseModel):
+    run_id: int | None
+    leads_today: int
+    routed_count: int
+    manual_review_count: int
+    avg_score: int | None
+    by_team: TeamCountsResponse
 
 
 def _seconds_until(hour: int, minute: int) -> float:
@@ -105,6 +123,7 @@ def create_app(
         version="1.0.0",
         lifespan=lifespan,
     )
+    frontend_directory = Path(__file__).resolve().parent.parent / "frontend"
 
     def require_admin(x_admin_key: Annotated[str | None, Header()] = None) -> None:
         expected = active_settings.admin_api_key
@@ -122,6 +141,10 @@ def create_app(
     @app.get("/health")
     def health() -> dict[str, str]:
         return {"status": "ok"}
+
+    @app.get("/leads/summary", response_model=LeadSummaryResponse)
+    def get_lead_summary() -> dict:
+        return repository.latest_summary()
 
     @app.post("/pipeline/run", response_model=PipelineRunResponse)
     async def run_pipeline(
@@ -157,6 +180,20 @@ def create_app(
     ) -> list[dict]:
         require_admin(x_admin_key)
         return repository.latest_leads("manual_review")
+
+    @app.get("/", include_in_schema=False)
+    def dashboard() -> FileResponse:
+        return FileResponse(frontend_directory / "index.html")
+
+    @app.get("/admin", include_in_schema=False)
+    def admin_dashboard() -> FileResponse:
+        return FileResponse(frontend_directory / "admin.html")
+
+    app.mount(
+        "/frontend",
+        StaticFiles(directory=frontend_directory),
+        name="frontend",
+    )
 
     return app
 
