@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/frontend/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="/frontend/_ds/industry-ef63f47b-ffac-4715-8596-c0d9a6ca52a6/styles.css">
+  <script src="/frontend/_ds/industry-ef63f47b-ffac-4715-8596-c0d9a6ca52a6/_ds_bundle.js"></script>
+  <script src="/frontend/image-slot.js"></script>
+  <style>
+    body { margin: 0; }
+    a { color: var(--color-accent-700); }
+    a:hover { color: var(--color-accent-900); }
+  </style>
+</helmet>
+<div style="background:var(--color-bg);font-family:var(--font-body);color:var(--color-text);min-height:100vh">
+  <aside style="width:232px;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;border-right:1px solid var(--color-divider);padding:var(--space-6) var(--space-4);display:flex;flex-direction:column;gap:var(--space-8);background:var(--color-bg)">
+    <div style="display:flex;align-items:center;gap:var(--space-3)">
+      <div class="blueprint" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--color-accent-900);color:var(--color-neutral-100);font-family:var(--font-heading);font-weight:600;font-size:15px;flex-shrink:0">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>MC
+      </div>
+      <div>
+        <div style="font-family:var(--font-heading);font-weight:600;font-size:17px;line-height:1.15">McCann Team</div>
+        <div style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;opacity:0.55">Permit Leads</div>
+      </div>
+    </div>
+    <nav style="display:flex;flex-direction:column;gap:var(--space-1)">
+      <a href="/" style="display:flex;align-items:center;gap:var(--space-3);padding:var(--space-3);background:var(--color-accent-100);color:var(--color-accent-800);font-weight:500;text-decoration:none">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+        Team Lead Queue
+      </a>
+      <a href="/admin" style="display:flex;align-items:center;gap:var(--space-3);padding:var(--space-3);color:var(--color-text);text-decoration:none">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="4"/><path d="M10.3 15H7a4 4 0 0 0-4 4v2"/><circle cx="17" cy="17" r="3"/><path d="m21 21-1.9-1.9"/></svg>
+        Manual Review
+        <span class="tag tag-neutral" style="margin-left:auto">{{ needsReview }}</span>
+      </a>
+    </nav>
+    <div style="margin-top:auto;font-size:12px;opacity:0.5;line-height:1.5">Sourced from Philadelphia L&amp;I permit data. Demo build — no live CRM sync.</div>
+  </aside>
+
+  <main style="margin-left:232px;min-width:0;padding:var(--space-8);display:flex;flex-direction:column;gap:var(--space-8)">
+    <section class="blueprint" style="position:relative;overflow:hidden;padding:var(--space-8);display:flex;flex-direction:column;gap:var(--space-8);min-height:720px">
+      <i class="corner tl" style="color:rgba(245,245,248,0.8)"></i><i class="corner tr" style="color:rgba(245,245,248,0.8)"></i><i class="corner bl" style="color:rgba(245,245,248,0.8)"></i><i class="corner br" style="color:rgba(245,245,248,0.8)"></i>
+      <div style="position:absolute;inset:0;z-index:0" class="duotone">
+        <img src="/frontend/uploads/kelly-kiernan-N1czT1c1WCY-unsplash.jpg" alt="Philadelphia skyline" style="{{ slide0Style }}">
+        <img src="/frontend/uploads/kelly-kiernan-x_MrSvy7Gdw-unsplash.jpg" alt="Philadelphia skyline" style="{{ slide1Style }}">
+        <img src="/frontend/uploads/master-wen-lpLRwDZigvc-unsplash.jpg" alt="Philadelphia skyline" style="{{ slide2Style }}">
+        <img src="/frontend/uploads/scott-serhat-duygun-alVthhdkV1A-unsplash.jpg" alt="Philadelphia skyline" style="{{ slide3Style }}">
+      </div>
+      <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(165deg, color-mix(in srgb, var(--color-accent-900) 62%, transparent) 0%, color-mix(in srgb, var(--color-accent-900) 38%, transparent) 55%, color-mix(in srgb, var(--color-accent-900) 46%, transparent) 100%);pointer-events:none"></div>
+      <div style="position:absolute;left:var(--space-8);top:var(--space-8);pointer-events:none;z-index:2">
+        <div style="font-size:13px;color:var(--color-neutral-100);opacity:0.85;margin-bottom:var(--space-2)">{{ today }}</div>
+        <h1 style="margin:0;color:var(--color-neutral-100);font-size:48px">Good morning.</h1>
+        <p style="margin:var(--space-2) 0 0;color:var(--color-neutral-100);font-size:15px;opacity:0.9;max-width:340px">Overnight permit pulls, scored and routed to Construction, Commercial and Residential.</p>
+      </div>
+
+      <div style="position:absolute;top:var(--space-8);right:var(--space-8);width:260px;display:flex;flex-direction:column;gap:var(--space-4);z-index:2">
+        <div class="blueprint" style="position:relative;padding:var(--space-4);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:color-mix(in srgb, var(--color-neutral-100) 24%, transparent);border-color:rgba(245,245,248,0.4);color:var(--color-neutral-100)">
+          <i class="corner tl" style="color:rgba(245,245,248,0.7)"></i><i class="corner tr" style="color:rgba(245,245,248,0.7)"></i><i class="corner bl" style="color:rgba(245,245,248,0.7)"></i><i class="corner br" style="color:rgba(245,245,248,0.7)"></i>
+          <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.8">Needs manual review</div>
+          <div style="font-family:var(--font-heading);font-size:34px;font-weight:600;margin-top:var(--space-1)">{{ needsReview }}</div>
+          <a href="/admin" style="font-size:12px;color:var(--color-neutral-100);opacity:0.9">View admin queue →</a>
+        </div>
+        <div class="blueprint" style="position:relative;padding:var(--space-4);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:color-mix(in srgb, var(--color-neutral-100) 15%, transparent);border-color:rgba(245,245,248,0.32);color:var(--color-neutral-100)">
+          <i class="corner tl" style="color:rgba(245,245,248,0.7)"></i><i class="corner tr" style="color:rgba(245,245,248,0.7)"></i><i class="corner bl" style="color:rgba(245,245,248,0.7)"></i><i class="corner br" style="color:rgba(245,245,248,0.7)"></i>
+          <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.8">Avg. score</div>
+          <div style="font-family:var(--font-heading);font-size:34px;font-weight:600;margin-top:var(--space-1)">{{ avgScore }}</div>
+        </div>
+      </div>
+
+      <div style="position:absolute;left:var(--space-8);bottom:calc(var(--space-8) + 76px);display:flex;gap:var(--space-4);z-index:2">
+        <div class="blueprint" style="position:relative;padding:var(--space-4);width:200px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:color-mix(in srgb, var(--color-neutral-100) 18%, transparent);border-color:rgba(245,245,248,0.35);color:var(--color-neutral-100)">
+          <i class="corner tl" style="color:rgba(245,245,248,0.7)"></i><i class="corner tr" style="color:rgba(245,245,248,0.7)"></i><i class="corner bl" style="color:rgba(245,245,248,0.7)"></i><i class="corner br" style="color:rgba(245,245,248,0.7)"></i>
+          <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.8">Leads today</div>
+          <div style="font-family:var(--font-heading);font-size:36px;font-weight:600;margin-top:var(--space-1)">{{ leadsToday }}</div>
+        </div>
+        <div class="blueprint" style="position:relative;padding:var(--space-4);width:260px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:color-mix(in srgb, var(--color-neutral-100) 26%, transparent);border-color:rgba(245,245,248,0.4);color:var(--color-neutral-100)">
+          <i class="corner tl" style="color:rgba(245,245,248,0.7)"></i><i class="corner tr" style="color:rgba(245,245,248,0.7)"></i><i class="corner bl" style="color:rgba(245,245,248,0.7)"></i><i class="corner br" style="color:rgba(245,245,248,0.7)"></i>
+          <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.8">By team</div>
+          <div style="display:flex;gap:var(--space-4);margin-top:var(--space-1)">
+            <div><div style="font-family:var(--font-heading);font-size:20px;font-weight:600">{{ byResidential }}</div><div style="font-size:10px;opacity:0.75">Residential</div></div>
+            <div><div style="font-family:var(--font-heading);font-size:20px;font-weight:600">{{ byCommercial }}</div><div style="font-size:10px;opacity:0.75">Commercial</div></div>
+            <div><div style="font-family:var(--font-heading);font-size:20px;font-weight:600">{{ byConstruction }}</div><div style="font-size:10px;opacity:0.75">Construction</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:absolute;left:var(--space-8);right:var(--space-8);bottom:var(--space-8);z-index:2;display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap">
+        <sc-for list="{{ chips }}" as="chip" hint-placeholder-count="4">
+          <button type="button" onClick="{{ chip.onClick }}" style="{{ chip.style }}">{{ chip.label }}</button>
+        </sc-for>
+        <div class="field" style="margin-left:auto;min-width:260px">
+          <input class="input" placeholder="Search address or owner" value="{{ search }}" onChange="{{ onSearchChange }}" style="background:color-mix(in srgb, var(--color-neutral-100) 30%, transparent);color:var(--color-neutral-100);border-color:rgba(245,245,248,0.4)">
+        </div>
+      </div>
+    </section>
+
+    <section class="card blueprint" style="padding:0;overflow:hidden">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <table class="table" style="width:100%">
+        <thead>
+          <tr>
+            <th onClick="{{ sortScore }}" style="cursor:pointer">Score <sc-if value="{{ scoreSortActive }}" hint-placeholder-val="{{ false }}"><sc-if value="{{ scoreDescIcon }}" hint-placeholder-val="{{ true }}">▾</sc-if><sc-if value="{{ scoreAscIcon }}" hint-placeholder-val="{{ false }}">▴</sc-if></sc-if></th>
+            <th>Address / Owner</th>
+            <th onClick="{{ sortTeam }}" style="cursor:pointer">Team</th>
+            <th>Permit</th>
+            <th onClick="{{ sortDays }}" style="cursor:pointer">Days open</th>
+            <th>Contractor</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-if value="{{ showStatus }}" hint-placeholder-val="{{ false }}">
+            <tr><td colSpan="8" style="padding:var(--space-8);text-align:center" class="text-muted">{{ statusMessage }}</td></tr>
+          </sc-if>
+          <sc-for list="{{ rows }}" as="lead" hint-placeholder-count="6">
+            <tr onClick="{{ lead.toggle }}" style="cursor:pointer">
+              <td><span class="tag tag-accent">{{ lead.score }}</span></td>
+              <td>
+                <div style="font-weight:500">{{ lead.address }}</div>
+                <div style="font-size:12px;opacity:0.6">{{ lead.owner }}</div>
+              </td>
+              <td><span class="{{ lead.teamTagClass }}">{{ lead.team }}</span></td>
+              <td>{{ lead.permitType }} · {{ lead.status }}<sc-if value="{{ lead.multiFlag }}" hint-placeholder-val="{{ false }}"><span class="tag tag-neutral" style="margin-left:var(--space-2)">{{ lead.permitCount }} permits</span></sc-if></td>
+              <td class="text-muted">{{ lead.daysOld }}d</td>
+              <td class="text-muted">{{ lead.contractorDisplay }}</td>
+              <td>
+                <span class="tag tag-outline">{{ lead.assignedRep }}</span>
+              </td>
+              <td style="text-align:right;padding-right:var(--space-4)">
+                <sc-if value="{{ lead.expanded }}" hint-placeholder-val="{{ false }}">▴</sc-if>
+                <sc-if value="{{ lead.collapsedIcon }}" hint-placeholder-val="{{ true }}">▾</sc-if>
+              </td>
+            </tr>
+            <sc-if value="{{ lead.expanded }}" hint-placeholder-val="{{ false }}">
+              <tr>
+                <td colSpan="8" style="background:var(--color-surface);padding:var(--space-4) var(--space-6)">
+                  <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.55;margin-bottom:var(--space-2)">Qualifying reasons</div>
+                  <sc-for list="{{ lead.reasons }}" as="reason" hint-placeholder-count="2">
+                    <div style="font-size:14px;margin-bottom:var(--space-1)">— {{ reason }}</div>
+                  </sc-for>
+                  <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.55;margin:var(--space-4) 0 var(--space-2)">Routing</div>
+                  <div style="font-size:14px">Assigned to {{ lead.assignedRep }}. Per-agent routing and Follow Up Boss sync remain pending client mapping.</div>
+                </td>
+              </tr>
+            </sc-if>
+          </sc-for>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const HERO_IMAGES = 4;
+
+class Component extends DCLogic {
+  state = {
+    leads: [], summary: null, loading: true, error: '', team: 'All', search: '',
+    sortKey: 'score', sortDir: 'desc', expandedId: null, slideIndex: 0,
+  };
+
+  componentDidMount() {
+    this.loadLeads();
+    this._slideTimer = setInterval(() => {
+      this.setState(s => ({ slideIndex: (s.slideIndex + 1) % HERO_IMAGES }));
+    }, 6000);
+  }
+  componentWillUnmount() { clearInterval(this._slideTimer); }
+
+  async loadLeads() {
+    try {
+      const [leadResponse, summaryResponse] = await Promise.all([
+        fetch('/leads/routed'),
+        fetch('/leads/summary'),
+      ]);
+      if (!leadResponse.ok || !summaryResponse.ok) throw new Error('The lead service is unavailable.');
+      const [rawLeads, summary] = await Promise.all([leadResponse.json(), summaryResponse.json()]);
+      const leads = rawLeads.map((lead, index) => ({
+        id: lead.permit || lead.opa_account_num || `lead-${index}`,
+        address: lead.address || 'Address unavailable',
+        owner: lead.owner || 'Owner unavailable',
+        team: lead.segment,
+        score: lead.score,
+        reasons: lead.reasons || [],
+        permitType: lead.type_of_work || 'Not listed',
+        status: lead.status || 'Unknown',
+        daysOld: lead.days_old == null ? '—' : lead.days_old,
+        contractor: lead.contractor,
+        assignedRep: lead.assigned_rep || `${lead.segment} Team`,
+        permitCount: lead.permit_count_for_property || 1,
+      }));
+      this.setState({ leads, summary, loading: false, error: '' });
+    } catch (error) {
+      this.setState({ loading: false, error: error.message || 'Unable to load leads.' });
+    }
+  }
+
+  setTeam(t) { this.setState({ team: t }); }
+  setSearch(e) { this.setState({ search: e.target.value }); }
+  toggleSort(key) {
+    this.setState(s => s.sortKey === key
+      ? { sortDir: s.sortDir === 'desc' ? 'asc' : 'desc' }
+      : { sortKey: key, sortDir: 'desc' });
+  }
+  toggleExpand(id) { this.setState(s => ({ expandedId: s.expandedId === id ? null : id })); }
+
+  renderVals() {
+    const { leads, summary, loading, error, team, search, sortKey, sortDir, expandedId, slideIndex } = this.state;
+    const slideStyle = (i) => ({ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: i === slideIndex ? 1 : 0, transition: 'opacity 1.4s ease' });
+    let rows = leads.filter(l =>
+      (team === 'All' || l.team === team) &&
+      (search === '' || `${l.address} ${l.owner}`.toLowerCase().includes(search.toLowerCase()))
+    );
+    rows = rows.slice().sort((a, b) => {
+      let av = a[sortKey], bv = b[sortKey];
+      if (typeof av === 'string') { av = av.toLowerCase(); bv = bv.toLowerCase(); }
+      if (av < bv) return sortDir === 'asc' ? -1 : 1;
+      if (av > bv) return sortDir === 'asc' ? 1 : -1;
+      return 0;
+    });
+    rows = rows.map(l => ({
+      ...l,
+      expanded: l.id === expandedId,
+      collapsedIcon: l.id !== expandedId,
+      teamTagClass: 'tag ' + (l.team === 'Construction' ? 'tag-accent' : l.team === 'Commercial' ? 'tag-outline' : 'tag-neutral'),
+      contractorDisplay: l.contractor || 'Not listed',
+      multiFlag: l.permitCount > 1,
+      toggle: () => this.toggleExpand(l.id),
+    }));
+
+    const teams = ['All', 'Construction', 'Commercial', 'Residential'];
+    const activeStyle = { padding: '8px 16px', border: '1px solid rgba(245,245,248,0.7)', background: 'color-mix(in srgb, var(--color-neutral-100) 30%, transparent)', color: 'var(--color-neutral-100)', fontWeight: 500, fontFamily: 'var(--font-body)', fontSize: '14px', cursor: 'pointer', backdropFilter: 'blur(12px)' };
+    const inactiveStyle = { padding: '8px 16px', border: '1px solid rgba(245,245,248,0.35)', background: 'color-mix(in srgb, var(--color-neutral-100) 12%, transparent)', color: 'var(--color-neutral-100)', fontFamily: 'var(--font-body)', fontSize: '14px', cursor: 'pointer', backdropFilter: 'blur(12px)' };
+    const chips = teams.map(t => ({ label: t, key: t, onClick: () => this.setTeam(t), style: t === team ? activeStyle : inactiveStyle }));
+    const byTeam = (summary && summary.by_team) || {};
+    const statusMessage = loading ? 'Loading live permit leads…' : error || (rows.length === 0 ? 'No leads match this view.' : '');
+
+    return {
+      today: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }),
+      rows, chips, search, statusMessage, showStatus: !!statusMessage,
+      slide0Style: slideStyle(0), slide1Style: slideStyle(1), slide2Style: slideStyle(2), slide3Style: slideStyle(3),
+      onSearchChange: (e) => this.setSearch(e),
+      leadsToday: summary ? summary.leads_today : '—',
+      byConstruction: byTeam.Construction || 0,
+      byCommercial: byTeam.Commercial || 0,
+      byResidential: byTeam.Residential || 0,
+      needsReview: summary ? summary.manual_review_count : '—',
+      avgScore: summary && summary.avg_score != null ? summary.avg_score : '—',
+      sortScore: () => this.toggleSort('score'),
+      sortDays: () => this.toggleSort('daysOld'),
+      sortTeam: () => this.toggleSort('team'),
+      scoreSortActive: sortKey === 'score',
+      scoreDescIcon: sortKey === 'score' && sortDir === 'desc',
+      scoreAscIcon: sortKey === 'score' && sortDir === 'asc',
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -64,6 +64,29 @@ def test_run_persists_queues_and_exports_csv(tmp_path):
         assert run.json()["routed_count"] == 1
         assert run.json()["manual_review_count"] == 1
 
+        dashboard = client.get("/")
+        assert dashboard.status_code == 200
+        assert "McCann Team" in dashboard.text
+        assert "fetch('/leads/routed')" in dashboard.text
+        assert "const LEADS" not in dashboard.text
+        admin_dashboard = client.get("/admin")
+        assert admin_dashboard.status_code == 200
+        assert "Manual Review Queue" in admin_dashboard.text
+        assert "Enter administrator key" in admin_dashboard.text
+        assert client.get("/frontend/react.production.min.js").status_code == 200
+        assert client.get("/frontend/react-dom.production.min.js").status_code == 200
+
+        summary = client.get("/leads/summary")
+        assert summary.status_code == 200
+        assert summary.json()["leads_today"] == 2
+        assert summary.json()["routed_count"] == 1
+        assert summary.json()["manual_review_count"] == 1
+        assert summary.json()["by_team"] == {
+            "Construction": 0,
+            "Commercial": 0,
+            "Residential": 1,
+        }
+
         routed = client.get("/leads/routed")
         assert routed.status_code == 200
         assert [lead["permit"] for lead in routed.json()] == ["ROUTED-1"]
